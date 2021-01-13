@@ -1,0 +1,61 @@
+:root {
+    --icon-size: 24px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+form {
+    display: flex;
+}
+
+input,
+button {
+    border: 1px solid #333;
+    padding: 7px;
+    font-size: 18px;
+    display: block;
+    margin: 15px;
+    max-width: 100%;
+}
+
+button {
+    background: #333;
+    color: #eee;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #000;
+    transition: background .3s;
+}
+
+.slug {
+    margin-left: 0;
+    border-left: 0;
+    border-radius: 0 2px 2px 0;
+    text-align: center;
+    width: 100px;
+}
+
+.url {
+    margin-right: 0;
+    border-radius: 2px 0 0 2px;
+}
