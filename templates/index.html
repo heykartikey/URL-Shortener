@@ -8,12 +8,18 @@
 
 {% block body %}
 <div id="wrapper">
-    <form action='/create/' method='POST'>
-        <input class="url" type="text" name="url" placeholder="a url" required autocomplete="off">
-        <input class="slug" type="text" name="slug" placeholder="a slug" required autocomplete="off" />
+    <form action='/' method='POST'>
+        <input type="text" name="url" placeholder="a url: https://www.example.com" required autocomplete="off">
+        <input type="text" name="slug" placeholder="a slug: hufeue" autocomplete="off" />
 
         <button type="submit">shorten</button>
     </form>
+    {% if short_url %}
+    <span id="success">{{short_url}}</span>
+    {% endif %}
+    {% if error %}
+    <span id="error">{{error}}</span>
+    {% endif %}
+
 </div>
-<script src="{{url_for('static', filename='js/script.js')}}"></script>
 {% endblock %}

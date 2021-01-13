@@ -18,11 +18,6 @@ class Shorter(db.Model):
         return f'<Inserted {self.slug} for {self.url}>'
 
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-
 def is_valid_url(url):
     return re.match(r'https?:\/\/(www.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)', url)
 
@@ -36,13 +31,12 @@ def generate_slug(size=6):
                    for _ in range(size))
 
 
-@app.route('/create/', methods=['POST'])
 def create():
     url = request.form['url']
     slug = request.form['slug']
 
     if(not is_valid_url(url)):
-        return redirect(url_for('index', error='Invalid URL'))
+        return render_template('index.html', error='Invalid URL')
 
     if(not is_valid_slug(slug)):
         slug = generate_slug()
@@ -55,9 +49,16 @@ def create():
     try:
         db.session.add(new_url)
         db.session.commit()
-        return redirect(url_for('index', short_url=new_url.slug))
+        return render_template('index.html', short_url=request.url_root + new_url.slug)
     except:
-        return redirect(url_for('index', error="Database Error. Try later!"))
+        return render_template('index.html', error="Database Error. Try later!")
+
+
+@app.route('/', methods=['POST', 'GET'])
+def index():
+    if request.method == 'POST':
+        return create()
+    return render_template('index.html')
 
 
 @app.route('/<slug>')
@@ -68,4 +69,4 @@ def redirectTo(slug):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
