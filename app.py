@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 import random
 import re
+import string
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
@@ -23,11 +24,11 @@ def is_valid_url(url):
 
 
 def is_valid_slug(slug):
-    return re.match(r'^[a-z]{6}$', slug)
+    return re.match(r'^[A-Za-z0-9]{6}$', slug)
 
 
 def generate_slug(size=6):
-    return ''.join(random.choice('abcdefghijklmnopqrstuvwxyz')
+    return ''.join(random.choice(string.ascii_letters + string.digits)
                    for _ in range(size))
 
 
