@@ -20,7 +20,7 @@ class Shorter(db.Model):
 
 
 def is_valid_url(url):
-    return url and re.match(r'https?:\/\/(www.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)', url)
+    return url and re.match(r'(https?:\/\/)?(www.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)', url)
 
 
 def is_valid_slug(slug):
@@ -41,6 +41,9 @@ def create():
         return {
             "error": "Invalid URL"
         }
+
+    if(not (url.startswith("http://") or url.startswith("https://"))):
+        url = f'http://{url}'
 
     if(not is_valid_slug(slug)):
         slug = generate_slug()
@@ -75,4 +78,4 @@ def redirectTo(slug):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
