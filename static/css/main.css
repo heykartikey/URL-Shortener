@@ -30,8 +30,6 @@ button {
     font-size: 18px;
     display: block;
     margin-bottom: 15px;
-    max-width: 256px;
-    width: 100%;
     border-radius: 2px;
     font-size: 1rem;
 }
@@ -49,6 +47,7 @@ button:hover {
 
 #wrapper {
     padding: 15px;
+    max-width: 300px;
 }
 
 #wrapper>span {

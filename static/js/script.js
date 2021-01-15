@@ -26,7 +26,7 @@ function fetch_short_url() {
         }
     }
 
-    xhr.open("POST", "/create");
+    xhr.open("POST", "/", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
 
     xhr.send(`url=${urlNode.value}&slug=${slugNode.value}`);
