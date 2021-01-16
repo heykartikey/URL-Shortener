@@ -9,10 +9,10 @@ db = SQLAlchemy(app)
 
 class Shorter(db.Model):
     slug = db.Column(db.String(8), primary_key=True)
-    url = db.Column(db.String(256), nullable=False)
+    url = db.Column(db.String(2049), nullable=False)
 
     def __repr__(self):
-        return f'<Inserted {self.slug} for {self.url}>'
+        return f'<Alias {self.slug} for {self.url}>'
 
 
 from url import URLValidator
