@@ -10,7 +10,7 @@ async function fetchResponse(url, slug) {
     return response.json();
 }
 
-function showMessage(responseJson, errorNode, successNode) {
+function showRespone(responseJson, errorNode, successNode) {
     if (responseJson.hasOwnProperty('error')) {
         errorNode.innerText = responseJson.error;
         errorNode.style.display = 'block';
@@ -30,7 +30,7 @@ document.getElementById('submit').addEventListener('click', async event => {
 
     const responseJson = await fetchResponse(urlNode.value, slugNode.value);
 
-    showMessage(responseJson,
+    showRespone(responseJson,
         document.getElementById('error'),
         document.getElementById('success')
     );
