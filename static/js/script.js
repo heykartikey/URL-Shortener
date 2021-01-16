@@ -1,38 +1,40 @@
-function fetch_short_url() {
-    let xhr = new XMLHttpRequest();
-
-    let urlNode = document.getElementsByName('url')[0];
-    let slugNode = document.getElementsByName('slug')[0];
-
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            const json = JSON.parse(xhr.responseText);
-
-            const err = document.getElementById('error');
-            const sxs = document.getElementById('success');
-
-            if (json.hasOwnProperty('error')) {
-                err.innerText = json.error;
-                err.style.display = 'block';
-                sxs.style.display = 'none';
-            } else {
-                sxs.innerText = json.short_url;
-                sxs.style.display = 'block';
-                err.style.display = 'none';
-            }
-
-            urlNode.value = ""
-            slugNode.value = ""
+async function fetchResponse(url, slug) {
+    const response = await fetch('/', {
+        'method': 'POST',
+        'body': `url=${url}&slug=${slug}`,
+        'headers': {
+            'Content-Type': 'application/x-www-form-urlencoded'
         }
-    }
+    });
 
-    xhr.open("POST", "/", true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-
-    xhr.send(`url=${urlNode.value}&slug=${slugNode.value}`);
+    return response.json();
 }
 
-document.getElementById('submit').addEventListener('click', event => {
+function showMessage(responseJson, errorNode, successNode) {
+    if (responseJson.hasOwnProperty('error')) {
+        errorNode.innerText = responseJson.error;
+        errorNode.style.display = 'block';
+        successNode.style.display = 'none';
+    } else {
+        successNode.innerText = responseJson.short_url;
+        successNode.style.display = 'block';
+        errorNode.style.display = 'none';
+    }
+}
+
+document.getElementById('submit').addEventListener('click', async event => {
     event.preventDefault();
-    fetch_short_url();
+
+    const urlNode = document.forms[0][0];
+    const slugNode = document.forms[0][1];
+
+    const responseJson = await fetchResponse(urlNode.value, slugNode.value);
+
+    showMessage(responseJson,
+        document.getElementById('error'),
+        document.getElementById('success')
+    );
+
+    urlNode.value = '';
+    slugNode.value = '';
 });
