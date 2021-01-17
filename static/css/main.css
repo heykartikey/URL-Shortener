@@ -16,6 +16,9 @@ body {
     align-items: center;
     flex-direction: column;
     background-color: #fafafa;
+    max-width: 1024px;
+    position: relative;
+    margin: 0 auto;
 }
 
 form {
@@ -64,4 +67,130 @@ button:hover {
 
 #error {
     background-color: #EF2D56;
+}
+
+#switch {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: #333;
+    cursor: pointer;
+    z-index: 999;
+    height: 30px;
+    width: 30px;
+    line-height: 15px;
+    padding: 4px;
+}
+
+#board {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    max-height: 289px;
+    background: #eee;
+    box-shadow: 0px 0px 1px #999;
+    padding: 8px 0 43px 0;
+    display: none;
+}
+
+#board-ul {
+    list-style: none;
+    max-height: 238px;
+    overflow-y: scroll;
+}
+
+#board-ul>li {
+    padding: 0 15px;
+    margin: 0 0 1px 0;
+    display: flex;
+}
+
+#board-ul>li:last-child {
+    margin-bottom: 0;
+}
+
+#board-ul>li>a {
+    line-height: 1.8rem;
+    font-size: .8rem;
+}
+
+#board-ul>li>a:first-child {
+    margin-right: 15px;
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 155px;
+    overflow: hidden;
+    line-height: 34.8px;
+}
+
+.copy {
+    padding: 3px 6px;
+    border-radius: 2px;
+    background: #244bc1;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.menu.icon {
+    color: #fff;
+    position: absolute;
+    margin-left: 2px;
+    margin-top: 10px;
+    width: 17px;
+    height: 1px;
+    background-color: currentColor;
+}
+
+.menu.icon:before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 17px;
+    height: 1px;
+    background-color: currentColor;
+}
+
+.menu.icon:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 17px;
+    height: 1px;
+    background-color: currentColor;
+}
+
+.close.icon {
+    color: #fff;
+    position: absolute;
+    margin-top: 0;
+    margin-left: 0;
+    width: 21px;
+    height: 21px;
+}
+
+.close.icon:before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    width: 21px;
+    height: 1px;
+    background-color: currentColor;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.close.icon:after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    width: 21px;
+    height: 1px;
+    background-color: currentColor;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
