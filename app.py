@@ -43,7 +43,7 @@ def index():
         except:
             return {'error': 'Database Error. Try later!'}
 
-        return {'short_url': [request.url_root, new_url.slug], "url": url}
+        return {'slug': new_url.slug, "originalURL": url}
 
     return render_template('index.html')
 

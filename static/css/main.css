@@ -132,6 +132,8 @@ button:hover {
     font-weight: 600;
     cursor: pointer;
     display: inline-block;
+    width: 65.6px;
+    text-align: center;
 }
 
 .menu.icon {

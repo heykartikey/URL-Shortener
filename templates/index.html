@@ -4,6 +4,8 @@
 <title>
     URL Shortener
 </title>
+<script type='module'>
+</script>
 {% endblock %}
 
 {% block body %}
@@ -27,48 +29,15 @@
     </ul>
 </div>
 
-<script src="{{url_for('static', filename='js/script.js')}}"></script>
+<script src="{{url_for('static', filename='js/functions.js')}}"></script>
+
 <script>
-    // document.getElementById('switch').click();
-
-    function copy(str) {
-        const el = document.createElement('textarea');
-        el.value = str;
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
-    };
-
     if (typeof Storage !== undefined) {
-        let ul = document.getElementById('board-ul');
-
         Object.keys(localStorage).forEach(key => {
-            const url = localStorage.getItem(key);
-
-            let liItem = document.createElement('li');
-            let urlItem = document.createElement('a');
-
-            urlItem.title = urlItem.innerText = url;
-
-            let copyItem = document.createElement('a');
-            copyItem.classList.add('copy');
-            copyItem.innerText = 'copy!';
-            copyItem.title = key;
-
-            copyItem.addEventListener('click', event => {
-                copy(document.URL + event.target.title);
-                event.target.innerText = 'done!';
-                window.setTimeout(() => {
-                    event.target.innerText = 'copy!';
-                }, 1000);
-            });
-
-            liItem.appendChild(urlItem);
-            liItem.appendChild(copyItem);
-
-            ul.appendChild(liItem);
+            appendItemToBoard(key);
         });
     }
 </script>
+
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
 {% endblock %}
