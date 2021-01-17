@@ -1,20 +1,3 @@
-document.getElementById('submit').addEventListener('click', async event => {
-    event.preventDefault();
-
-    const urlNode = document.forms[0][0];
-    const slugNode = document.forms[0][1];
-
-    const responseJson = await fetchResponse(urlNode.value, slugNode.value);
-
-    showRespone(responseJson,
-        document.getElementById('error'),
-        document.getElementById('success')
-    );
-
-    urlNode.value = '';
-    slugNode.value = '';
-});
-
 async function fetchResponse(url, slug) {
     const response = await fetch('/', {
         'method': 'POST',
@@ -44,9 +27,18 @@ function showRespone(responseJson, errorNode, successNode) {
     }
 }
 
-document.getElementById('switch').addEventListener('click', e => {
-    toggleDisplay(document.getElementById('board'));
-    toggleIcon(document.getElementById('switch').children[0]);
+document.getElementById('submit').addEventListener('click', async event => {
+    event.preventDefault();
+
+    const urlNode = document.forms[0][0];
+    const slugNode = document.forms[0][1];
+
+    const responseJson = await fetchResponse(urlNode.value, slugNode.value);
+
+    showRespone(responseJson,
+        document.getElementById('error'),
+        document.getElementById('success')
+    );
 });
 
 function toggleIcon(element) {
@@ -58,3 +50,8 @@ function toggleIcon(element) {
         element.classList.remove('menu');
     }
 }
+
+document.getElementById('switch').addEventListener('click', e => {
+    toggleDisplay(document.getElementById('board'));
+    toggleIcon(document.getElementById('switch').children[0]);
+});
